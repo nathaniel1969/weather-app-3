@@ -1,0 +1,17 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "This is a Weather app",
+  "license": "ISC",
+  "author": "Nathaniel Robinson",
+  "type": "module",
+  "main": "script.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "vite": "^6.2.5"
+  }
+}
