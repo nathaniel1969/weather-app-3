@@ -151,14 +151,28 @@ button:hover {
   justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
+  width: 100%; /* Default width for smaller screens */
 }
 
 .search-row form {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-grow: 1; /* Allow the form to grow and take up available space */
 }
 
 .search-row .toggle-switch {
   margin-left: 10px;
+}
+
+/* Responsive Design for Tablets and Computers */
+@media (min-width: 768px) {
+  .search-row {
+    max-width: 75%; /* Limit the width to 75% of the screen */
+    margin: 0 auto; /* Center the row horizontally */
+  }
+
+  .search-row form input {
+    width: 100%; /* Allow the input to take up the remaining space */
+  }
 }
