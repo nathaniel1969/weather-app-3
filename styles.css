@@ -49,6 +49,14 @@ button:hover {
     background: #0056b3;
 }
 
+/* Shrink button size on smaller screens */
+@media (max-width: 768px) {
+    button {
+        padding: 6px 12px; /* Reduce padding for smartphones */
+        font-size: 0.8rem; /* Smaller font size */
+    }
+}
+
 #forecast {
     display: flex;
     flex-wrap: wrap;
@@ -100,79 +108,83 @@ button:hover {
 
 /* Toggle Switch Styles */
 .toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Add spacing between the slider and the label */
 }
 
 .toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .toggle-switch .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 24px;
-  transition: 0.4s;
+    position: relative;
+    cursor: pointer;
+    width: 50px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 24px;
+    transition: 0.4s;
 }
 
 .toggle-switch .slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  border-radius: 50%;
-  transition: 0.4s;
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
 }
 
 .toggle-switch input:checked + .slider {
-  background-color: #007BFF;
+    background-color: #007BFF;
 }
 
 .toggle-switch input:checked + .slider:before {
-  transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.toggle-switch .toggle-label {
+    font-size: 0.9rem; /* Adjust font size for the label */
+    color: #333; /* Match the text color */
+    white-space: nowrap; /* Prevent the label from wrapping */
 }
 
 /* Align the search bar, button, and toggle switch in a row */
 .search-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  width: 100%; /* Default width for smaller screens */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%; /* Default width for smaller screens */
 }
 
 .search-row form {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-grow: 1; /* Allow the form to grow and take up available space */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1; /* Allow the form to grow and take up available space */
 }
 
 .search-row .toggle-switch {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 /* Responsive Design for Tablets and Computers */
 @media (min-width: 768px) {
-  .search-row {
-    max-width: 75%; /* Limit the width to 75% of the screen */
-    margin: 0 auto; /* Center the row horizontally */
-  }
+    .search-row {
+        max-width: 75%; /* Limit the width to 75% of the screen */
+        margin: 0 auto; /* Center the row horizontally */
+    }
 
-  .search-row form input {
-    width: 100%; /* Allow the input to take up the remaining space */
-  }
+    .search-row form input {
+        width: 100%; /* Allow the input to take up the remaining space */
+    }
 }
