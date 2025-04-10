@@ -57,10 +57,6 @@ document
     try {
       const weatherData = await fetchWeather(city);
 
-      // Log the weather data to debug
-      console.log("Weather Data:", weatherData);
-
-      // Format the date
       const formatDate = (dateString) => {
         // Treat the date as UTC
         const date = new Date(`${dateString}T00:00:00Z`);
@@ -69,6 +65,7 @@ document
           month: "short",
           day: "2-digit",
           year: "numeric",
+          timeZone: "UTC", // Force UTC timezone
         })
           .format(date)
           .replace(", ", "\n");
