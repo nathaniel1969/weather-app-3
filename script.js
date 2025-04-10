@@ -44,6 +44,14 @@ const getWeatherCondition = (weatherCode) => {
   return weatherConditions[weatherCode] || { condition: "Unknown", icon: "❓" };
 };
 
+const unitToggle = document.getElementById("unit-toggle");
+let isMetric = false; // Default to Imperial
+
+const convertTemperature = (temp) =>
+  (isMetric ? temp : (temp * 9) / 5 + 32).toFixed(1);
+const convertPrecipitation = (precip) =>
+  isMetric ? precip : (precip / 25.4).toFixed(2);
+
 document
   .getElementById("city-form")
   .addEventListener("submit", async (event) => {
@@ -58,33 +66,48 @@ document
       const weatherData = await fetchWeather(city);
 
       const formatDate = (dateString) => {
-        // Treat the date as UTC
         const date = new Date(`${dateString}T00:00:00Z`);
         return new Intl.DateTimeFormat("en-US", {
           weekday: "long",
           month: "short",
           day: "2-digit",
           year: "numeric",
-          timeZone: "UTC", // Force UTC timezone
+          timeZone: "UTC",
         })
           .format(date)
           .replace(", ", "\n");
       };
 
-      forecastDiv.innerHTML = weatherData
-        .map((day) => {
-          const { condition, icon } = getWeatherCondition(day.weatherCode);
-          return `
-      <div class="forecast-card">
-        <p><strong>${formatDate(day.date)}</strong></p>
-        <p>${icon} <strong>${condition}</strong></p>
-        <p><strong>Max Temp:</strong> ${day.maxTemp}°C</p>
-        <p><strong>Min Temp:</strong> ${day.minTemp}°C</p>
-        <p><strong>Precipitation:</strong> ${day.precipitation} mm</p>
-      </div>
-    `;
-        })
-        .join("");
+      const renderForecast = () => {
+        forecastDiv.innerHTML = weatherData
+          .map((day) => {
+            const { condition, icon } = getWeatherCondition(day.weatherCode);
+            return `
+              <div class="forecast-card">
+                <p><strong>${formatDate(day.date)}</strong></p>
+                <p>${icon} <strong>${condition}</strong></p>
+                <p><strong>Max Temp:</strong> ${convertTemperature(
+                  day.maxTemp
+                )}°${isMetric ? "C" : "F"}</p>
+                <p><strong>Min Temp:</strong> ${convertTemperature(
+                  day.minTemp
+                )}°${isMetric ? "C" : "F"}</p>
+                <p><strong>Precipitation:</strong> ${convertPrecipitation(
+                  day.precipitation
+                )} ${isMetric ? "mm" : "in"}</p>
+              </div>
+            `;
+          })
+          .join("");
+      };
+
+      renderForecast();
+
+      // Re-render forecast when the unit toggle is switched
+      unitToggle.addEventListener("change", () => {
+        isMetric = unitToggle.checked;
+        renderForecast();
+      });
     } catch (error) {
       console.error("Error fetching weather data:", error);
       forecastDiv.innerHTML = "Error fetching weather data. Please try again.";

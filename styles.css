@@ -97,3 +97,18 @@ button:hover {
         width: 90%;
     }
 }
+
+.unit-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.unit-toggle input {
+    margin-right: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
